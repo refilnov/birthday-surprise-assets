@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Surprise Special</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            width: 100%;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        /* Error Page */
+        .error-page {
+            text-align: center;
+            background-color: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+            width: 100%;
+        }
+        
+        .error-title {
+            font-size: 36px;
+            color: #e74c3c;
+            margin-bottom: 20px;
+        }
+        
+        .error-message {
+            font-size: 18px;
+            color: #333;
+            margin-bottom: 30px;
+        }
+        
+        .error-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+        
+        .error-btn {
+            padding: 10px 25px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: transform 0.3s, background-color 0.3s;
+        }
+        
+        .error-btn:hover {
+            background-color: #2980b9;
+            transform: scale(1.05);
+        }
+        
+        /* Main Content */
+        .main-content {
+            display: none;
+            width: 100%;
+            max-width: 800px;
+        }
+        
+        .session {
+            display: none;
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            margin: 20px 0;
+            text-align: center;
+        }
+        
+        .session.active {
+            display: block;
+            animation: fadeIn 1s;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .session-title {
+            font-size: 24px;
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+        
+        .session-message {
+            font-size: 16px;
+            color: #34495e;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+        
+        .photos-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+        
+        .photo {
+            width: 200px;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s;
+        }
+        
+        .photo:hover {
+            transform: scale(1.05);
+        }
+        
+        .single-photo {
+            width: 350px;
+            height: 350px;
+            object-fit: cover;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+            margin: 0 auto 30px;
+            display: block;
+        }
+        
+        .navigation {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .nav-btn {
+            padding: 10px 20px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 18px;
+            transition: transform 0.3s, background-color 0.3s;
+        }
+        
+        .nav-btn:hover {
+            background-color: #2980b9;
+            transform: scale(1.1);
+        }
+        
+        /* Background */
+        .bg-image {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+            opacity: 0.2;
+        }
+    </style>
+</head>
+<body>
+    <!-- Background Image -->
+    <img src="https://raw.githubusercontent.com/refilnov/birthday-surprise-assets/main/background.jpeg" alt="Background" class="bg-image" id="bgImage">
+    
+    <div class="container">
+        <!-- Error Page -->
+        <div class="error-page" id="errorPage">
+            <h1 class="error-title">Error 404</h1>
+            <p class="error-message">Birthday Surprise Not Found</p>
+            <div class="error-buttons">
+                <button class="error-btn" id="closeBtn">Close</button>
+                <button class="error-btn" id="refreshBtn">Refresh</button>
+            </div>
+        </div>
+        
+        <!-- Main Content -->
+        <div class="main-content" id="mainContent">
+            <!-- Session 1 -->
+            <div class="session" id="session1">
+                <h2 class="session-title">Decul Happy Birthday!!</h2>
+                <p class="session-message">Selamat ulang tahun, sayang! 🎉✨ Di hari special ini🤭, aku pengen doain segala hal baik buat kamu cinta. Kedepannya terutama tahun ini, semua impian dan rencana kamu diperlancar dan dipermudah, semoga setiap masalah yang lagi kamu hadepin bisa kamu lewatin yaa😇.</p>
+                <div class="photos-container">
+                    <img src="https://raw.githubusercontent.com/refilnov/birthday-surprise-assets/main/foto%201.jpeg" alt="foto-1" class="photo"></a>
+                    <img src="https://raw.githubusercontent.com/refilnov/birthday-surprise-assets/main/foto%202.jpeg" alt="Foto 2" class="photo">
+                    <img src="https://raw.githubusercontent.com/refilnov/birthday-surprise-assets/main/foto%203.jpeg" alt="Foto 3" class="photo">
+                </div>
+                <div class="navigation">
+                    <button class="nav-btn" id="nextBtn1">⇩</button>
+                </div>
+            </div>
+            
+            <!-- Session 1.5 (Single Photo) -->
+            <div class="session" id="session1_5">
+                <h2 class="session-title">Cantik Banget Sampe Mleyot Liatnya🤩🤩</h2>
+                <img src="https://raw.githubusercontent.com/refilnov/birthday-surprise-assets/main/foto%204.jpeg" alt="Foto Berdua" class="single-photo">
+                <p class="session-message">Semakin bertambah usia kamu, kamu harus selalu sehat sehat terus yaa, semakin cantik yaa (itu sebuah keharusan sih..🤭🤭), semakin sabar menjalani kehidupan ini yaa (terutama ngadepin aku😅). Kamu bahagia terus yaa sayang😅.</p>
+                <div class="navigation">
+                    <button class="nav-btn" id="prevBtn1_5">⇧</button>
+                    <button class="nav-btn" id="nextBtn1_5">⇩</button>
+                </div>
+            </div>
+            
+            <!-- Session 2 -->
+            <div class="session" id="session2">
+                <h2 class="session-title">Cantik amat sihhh😭😍🤩</h2>
+                <p class="session-message">Cinta buat rencana pribadi kamu yang pengen kamu gapai, kamu semangat buat itu yaa. Aku siap bantu kamu buat mencapai itu kalo emang aku dibutuhin😁. Kamu jangan lupa senyum ke aku kalo lagi capek, tuh senyum kamu cantik amat tuh.. nanti kalo kamu lagi capek aku siap main sama kamu kemana aja biar energi kamu full lagi😁💙.</p>
+                <div class="photos-container">
+                    <img src="https://raw.githubusercontent.com/refilnov/birthday-surprise-assets/main/foto%205.jpeg" alt="Foto 4" class="photo">
+                    <img src="https://raw.githubusercontent.com/refilnov/birthday-surprise-assets/main/foto%206.jpeg" alt="Foto 5" class="photo">
+                    <img src="https://raw.githubusercontent.com/refilnov/birthday-surprise-assets/main/foto%207.jpeg" alt="Foto 6" class="photo">
+                </div>
+                <div class="navigation">
+                    <button class="nav-btn" id="prevBtn2">⇧</button>
+                    <button class="nav-btn" id="nextBtn2">⇩</button>
+                </div>
+            </div>
+            
+            <!-- Session 2.5 (Single Photo) -->
+            <div class="session" id="session2_5">
+                <h2 class="session-title">HEHEHEHE😃😃</h2>
+                <img src="https://raw.githubusercontent.com/refilnov/birthday-surprise-assets/main/foto%208.jpeg" alt="Foto Berdua" class="single-photo">
+                <p class="session-message">Ini salah satu foto kesukaan aku hehe. Suka banget sama foto ini hehehe, kamu cantik amat, kalo diliat dua duanya senyumnya sama sama tulus..</p>
+                <div class="navigation">
+                    <button class="nav-btn" id="prevBtn2_5">⇧</button>
+                    <button class="nav-btn" id="nextBtn2_5">⇩</button>
+                </div>
+            </div>
+            
+            <!-- Session 3 -->
+            <div class="session" id="session3">
+                <h2 class="session-title">Makasih ya cintaa😔</h2>
+                <p class="session-message">Kamu udah mau nerima aku lagi, makasih ya cinta. Kamu masih punya sabar buat ngadepin aku. Aku berusaha juga buat kita kedepannya semoga baik baik aja ya cinta. I love you💙</p>
+                <div class="photos-container">
+                    <img src="https://raw.githubusercontent.com/refilnov/birthday-surprise-assets/main/foto%209.jpeg" alt="Foto 7" class="photo">
+                    <img src="https://raw.githubusercontent.com/refilnov/birthday-surprise-assets/main/foto%2010.jpeg" alt="Foto 8" class="photo">
+                    <img src="https://raw.githubusercontent.com/refilnov/birthday-surprise-assets/main/foto%2011.jpeg" alt="Foto 9" class="photo">
+                </div>
+                <div class="navigation">
+                    <button class="nav-btn" id="prevBtn3">⇧</button>
+                    <button class="nav-btn" id="nextBtn3">⇩</button>
+                </div>
+            </div>
+            
+            <!-- Session 3.5 (Single Photo) -->
+            <div class="session" id="session3_5">
+                <h2 class="session-title">Decul kamu cantik banget!!</h2>
+                <img src="https://raw.githubusercontent.com/refilnov/birthday-surprise-assets/main/foto%2012.jpeg" alt="Foto Berdua" class="single-photo">
+                <p class="session-message">Kamu cantik banget bener deh, tiap kali aku liat kamu bawaannya tuh masih ada rasa nyesel karena pernah nyakitin kamu. Buat kedepannya aku berusaha buat kita happy bareng lagi yaa ehehhe💙</p>
+                <div class="navigation">
+                    <button class="nav-btn" id="prevBtn3_5">⇧</button>
+                    <button class="nav-btn" id="nextBtn3_5">⇩</button>
+                </div>
+            </div>
+            
+            <!-- Session 4 -->
+            <div class="session" id="session4">
+                <h2 class="session-title">SERUUUUU🤩🤩🤩</h2>
+                <p class="session-message">Aku seneng banget liburan kemarin bisa main sama kamu, even if it was just for a little while. semenjak kita jalan jalan kemarin aku jadi pengen deh kita eksplore tempat lain di jakarta lagi. So, when I come back, let's go on another little adventure together, okay? 😊</p>
+                <div class="photos-container">
+                    <img src="https://raw.githubusercontent.com/refilnov/birthday-surprise-assets/main/foto%2013.jpeg" alt="Foto 10" class="photo">
+                    <img src="https://raw.githubusercontent.com/refilnov/birthday-surprise-assets/main/foto%2014.jpeg" alt="Foto 11" class="photo">
+                    <img src="https://raw.githubusercontent.com/refilnov/birthday-surprise-assets/main/foto%2015.jpeg" alt="Foto 12" class="photo">
+                </div>
+                <div class="navigation">
+                    <button class="nav-btn" id="prevBtn4">⇧</button>
+                    <button class="nav-btn" id="nextBtn4">⇩</button>
+                </div>
+            </div>
+            
+            <!-- Session 4.5 (Single Photo) -->
+            <div class="session" id="session4_5">
+                <h2 class="session-title">Kembang Api🎆🎇😁🤩😍</h2>
+                <img src="https://raw.githubusercontent.com/refilnov/birthday-surprise-assets/main/foto%2016.jpeg" alt="Foto Berdua" class="single-photo">
+                <p class="session-message">Udah 7 Miliar ratus tahun abad yang lalu pengen ngeliat kembang api bareng akhirnya kesampean.. dulu udah pernah sih tapi kayak udah aja cuma yang ini lebih 🤩🤩🤩 aku seneng malem malem keliling sama kamu🤩😁 nanti aku culik terus kamu ya😈</p>
+                <div class="navigation">
+                    <button class="nav-btn" id="prevBtn4_5">⇧</button>
+                    <button class="nav-btn" id="nextBtn4_5">⇩</button>
+                </div>
+            </div>
+            
+            <!-- Session 5 -->
+            <div class="session" id="session5">
+                <h2 class="session-title">Happy Birthday🤩😍💙💛🥳🥳</h2>
+                <p class="session-message">Once again, Happy Birthday cinta. Semoga kamu selalu baik baik aja yaa, sehat terus, cantik terus, sabar terus. Semangat ya cinta buat ngejalanin hari hari kamu mau itu les/kir/bucin sama aku.. dan dipermudah & diperlancar perjalanan menjadi seorang guru muda cantik gemes amat😍😍 (aku siap nemenin perjalanan kamu jadi guru😁) </p>
+                <div class="photos-container">
+                    <img src="https://raw.githubusercontent.com/refilnov/birthday-surprise-assets/main/foto%2017.jpeg" alt="Foto 13" class="photo">
+                    <img src="https://raw.githubusercontent.com/refilnov/birthday-surprise-assets/main/foto%2018.jpeg" alt="Foto 14" class="photo">
+                    <img src="https://raw.githubusercontent.com/refilnov/birthday-surprise-assets/main/foto%2019.jpeg" alt="Foto 15" class="photo">
+                </div>
+                <div class="navigation">
+                    <button class="nav-btn" id="prevBtn5">⇧</button>
+                    <button class="nav-btn" id="finalBtn">❤️</button>
+                </div>
+            </div>
+            
+            <!-- Final Session -->
+            <div class="session" id="finalSession">
+                <h2 class="session-title">Yours always, Tayo.</h2>
+                <img src="https://raw.githubusercontent.com/refilnov/birthday-surprise-assets/main/foto%2020.jpg" alt="Foto Final" class="single-photo">
+                <p class="session-message">Thank you for accepting me again. Thank you for trying to trust me once more. Thank you for loving me again. Thank you for helping me when I was at my lowest. Thank you for being a part of my life. Thank you for being strong enough to face everything with me. Thank you for choosing to fight alongside me once more. I truly, deeply appreciate you. I love you.
+                    This last photo will always be engraved in my mind a reminder that I will hold your hand forever. I love you💛💙.
+                    Happy birthday💙.</p>
+                <div class="navigation">
+                    <button class="nav-btn" id="prevBtnFinal">⇧</button>
+                    <button class="nav-btn" id="restartBtn">I love you kekasih💛💙</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // DOM Elements
+        const errorPage = document.getElementById('errorPage');
+        const mainContent = document.getElementById('mainContent');
+        const closeBtn = document.getElementById('closeBtn');
+        const refreshBtn = document.getElementById('refreshBtn');
+        const bgImage = document.getElementById('bgImage');
+        
+        // Sessions
+        const session1 = document.getElementById('session1');
+        const session1_5 = document.getElementById('session1_5');
+        const session2 = document.getElementById('session2');
+        const session2_5 = document.getElementById('session2_5');
+        const session3 = document.getElementById('session3');
+        const session3_5 = document.getElementById('session3_5');
+        const session4 = document.getElementById('session4');
+        const session4_5 = document.getElementById('session4_5');
+        const session5 = document.getElementById('session5');
+        const finalSession = document.getElementById('finalSession');
+        
+        // Navigation Buttons
+        const nextBtn1 = document.getElementById('nextBtn1');
+        const prevBtn1_5 = document.getElementById('prevBtn1_5');
+        const nextBtn1_5 = document.getElementById('nextBtn1_5');
+        const prevBtn2 = document.getElementById('prevBtn2');
+        const nextBtn2 = document.getElementById('nextBtn2');
+        const prevBtn2_5 = document.getElementById('prevBtn2_5');
+        const nextBtn2_5 = document.getElementById('nextBtn2_5');
+        const prevBtn3 = document.getElementById('prevBtn3');
+        const nextBtn3 = document.getElementById('nextBtn3');
+        const prevBtn3_5 = document.getElementById('prevBtn3_5');
+        const nextBtn3_5 = document.getElementById('nextBtn3_5');
+        const prevBtn4 = document.getElementById('prevBtn4');
+        const nextBtn4 = document.getElementById('nextBtn4');
+        const prevBtn4_5 = document.getElementById('prevBtn4_5');
+        const nextBtn4_5 = document.getElementById('nextBtn4_5');
+        const prevBtn5 = document.getElementById('prevBtn5');
+        const finalBtn = document.getElementById('finalBtn');
+        const prevBtnFinal = document.getElementById('prevBtnFinal');
+        const restartBtn = document.getElementById('restartBtn');
+
+// Fungsi untuk menampilkan sesi
+function showSession(session) {
+    // Sembunyikan semua sesi
+    const sessions = document.querySelectorAll('.session');
+    sessions.forEach(s => {
+        s.classList.remove('active');
+    });
+    
+    // Tampilkan sesi yang dipilih
+    session.classList.add('active');
+}
+
+// Gimmick halaman error
+closeBtn.addEventListener('click', function() {
+    setTimeout(function() {
+        errorPage.style.display = 'none';
+        mainContent.style.display = 'block';
+        session1.classList.add('active');
+    }, 500);
+});
+
+refreshBtn.addEventListener('click', function() {
+    setTimeout(function() {
+        errorPage.style.display = 'none';
+        mainContent.style.display = 'block';
+        session1.classList.add('active');
+    }, 500);
+});
+
+// Navigasi tombol-tombol sesi
+nextBtn1.addEventListener('click', function() {
+    showSession(session1_5);
+});
+
+prevBtn1_5.addEventListener('click', function() {
+    showSession(session1);
+});
+
+nextBtn1_5.addEventListener('click', function() {
+    showSession(session2);
+});
+
+prevBtn2.addEventListener('click', function() {
+    showSession(session1_5);
+});
+
+nextBtn2.addEventListener('click', function() {
+    showSession(session2_5);
+});
+
+prevBtn2_5.addEventListener('click', function() {
+    showSession(session2);
+});
+
+nextBtn2_5.addEventListener('click', function() {
+    showSession(session3);
+});
+
+prevBtn3.addEventListener('click', function() {
+    showSession(session2_5);
+});
+
+nextBtn3.addEventListener('click', function() {
+    showSession(session3_5);
+});
+
+prevBtn3_5.addEventListener('click', function() {
+    showSession(session3);
+});
+
+nextBtn3_5.addEventListener('click', function() {
+    showSession(session4);
+});
+
+prevBtn4.addEventListener('click', function() {
+    showSession(session3_5);
+});
+
+nextBtn4.addEventListener('click', function() {
+    showSession(session4_5);
+});
+
+prevBtn4_5.addEventListener('click', function() {
+    showSession(session4);
+});
+
+nextBtn4_5.addEventListener('click', function() {
+    showSession(session5);
+});
+
+prevBtn5.addEventListener('click', function() {
+    showSession(session4_5);
+});
+
+finalBtn.addEventListener('click', function() {
+    showSession(finalSession);
+});
+
+prevBtnFinal.addEventListener('click', function() {
+    showSession(session5);
+});
+
+restartBtn.addEventListener('click', function() {
+    // Kembali ke awal
+    errorPage.style.display = 'block';
+    mainContent.style.display = 'none';
+});
+
+// Fungsi untuk mengganti gambar latar belakang
+function setBackgroundImage(url) {
+    bgImage.src = url;
+}
+
+// Anda dapat memanggil fungsi ini dengan URL foto Anda berdua
+// setBackgroundImage('URL_FOTO_ANDA_BERDUA');
+
+// Fungsi untuk mengganti foto-foto dalam sesi
+function updatePhotos(sessionId, photoUrls) {
+    const session = document.getElementById(sessionId);
+    const photos = session.querySelectorAll('.photo');
+    
+    for (let i = 0; i < photos.length && i < photoUrls.length; i++) {
+        photos[i].src = photoUrls[i];
+    }
+}
+
+// Fungsi untuk mengganti foto tunggal
+function updateSinglePhoto(sessionId, photoUrl) {
+    const session = document.getElementById(sessionId);
+    const photo = session.querySelector('.single-photo');
+    photo.src = photoUrl;
+}
+
+// Fungsi untuk mengubah teks judul dan pesan
+function updateSessionText(sessionId, title, message) {
+    const session = document.getElementById(sessionId);
+    const titleElement = session.querySelector('.session-title');
+    const messageElement = session.querySelector('.session-message');
+    
+    titleElement.textContent = title;
+    messageElement.textContent = message;
+}
+
+// Contoh penggunaan:
+/*
+updateSessionText('session1', 'Judul Baru', 'Pesan baru yang lebih romantis');
+updatePhotos('session1', ['url-foto-1.jpg', 'url-foto-2.jpg', 'url-foto-3.jpg']);
+updateSinglePhoto('session1_5', 'url-foto-spesial.jpg');
+*/
+</script>
+</body>
+</html>
